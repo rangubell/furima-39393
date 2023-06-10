@@ -80,6 +80,12 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
+      it 'passwordに全角文字を含む場合は登録できない' do
+        @user.password = 'パスワード1'
+        @user.password_confirmation = 'パスワード１'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
       it 'passwordが129文字以上では登録できない' do
         @user.password = Faker::Internet.password(min_length: 129, max_length: 150)
         @user.password_confirmation = @user.password
@@ -98,6 +104,29 @@ RSpec.describe User, type: :model do
         @user.password_confirmation = '123456'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+      it 'last_nameに半角文字が含まれていると登録できない' do
+        @user.last_name = 'ﾀﾅｶ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name is invalid')
+      end
+
+      it 'first_nameに半角文字が含まれていると登録できない' do
+        @user.first_name = 'ﾀﾛｳ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name is invalid')
+      end
+
+      it 'last_name_kanaにカタカナ以外の文字が含まれていると登録できない' do
+        @user.last_name_kana = '田中'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana is invalid')
+      end
+
+      it 'first_name_kanaにカタカナ以外の文字が含まれていると登録できない' do
+        @user.first_name_kana = '太郎'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name kana is invalid')
       end
     end
   end
