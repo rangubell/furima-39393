@@ -7,6 +7,6 @@ class ShippingDurationOption < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
-  has_many :shipping_duration
+  has_many :shipping_durations
 
   end

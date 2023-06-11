@@ -10,6 +10,6 @@ class Conditionoption < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
-  has_many :condition
+  has_many :conditions
 
   end

@@ -1,4 +1,4 @@
 class ShippingDuration < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :ShippingDurationOption
+  belongs_to :shipping_duration_option
 end

@@ -1,4 +1,4 @@
 class Condition < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :Conditionoption
+  belongs_to :condition_option
 end
