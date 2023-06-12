@@ -11,5 +11,4 @@ class Conditionoption < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :conditions
-
-  end
+end

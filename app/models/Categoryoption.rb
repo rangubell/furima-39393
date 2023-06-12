@@ -15,5 +15,4 @@ class Categoryoption < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :categories
-
-  end
+end

@@ -7,5 +7,4 @@ class ShippingFeeOption < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :Shipping_Fees
-
-  end
+end

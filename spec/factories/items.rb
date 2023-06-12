@@ -7,8 +7,7 @@ FactoryBot.define do
     shipping_fee_id { Faker::Number.between(from: 1, to: 3) }
     shipping_origin_id { Faker::Number.between(from: 1, to: 48) }
     shipping_duration_id { Faker::Number.between(from: 1, to: 4) }
-    price { Faker::Number.between(from: 300, to: 9999999) }
+    price { Faker::Number.between(from: 300, to: 9_999_999) }
     image { Rack::Test::UploadedFile.new(Rails.root.join('app', 'assets', 'images/star.png'), 'image/jpeg') }
   end
 end
-
