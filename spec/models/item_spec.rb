@@ -84,25 +84,25 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be selected')
       end
-    
+
       it 'condition_idが1の場合は登録できない' do
         @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Condition must be selected')
       end
-    
+
       it 'shipping_fee_idが1の場合は登録できない' do
         @item.shipping_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Shipping fee must be selected')
       end
-    
+
       it 'shipping_origin_idが1の場合は登録できない' do
         @item.shipping_origin_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Shipping origin must be selected')
       end
-    
+
       it 'shipping_duration_idが1の場合は登録できない' do
         @item.shipping_duration_id = 1
         @item.valid?
