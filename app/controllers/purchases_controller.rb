@@ -1,5 +1,4 @@
-# app/controllers/orders_controller.rb
-class OrdersController < ApplicationController
+class PurchasesController < ApplicationController
   def new
     @order_form = OrderForm.new
   end
