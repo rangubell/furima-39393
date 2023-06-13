@@ -24,9 +24,7 @@ class ItemsController < ApplicationController
 
   def edit
     if user_signed_in?
-      if current_user.nickname != @item.user.nickname
-        redirect_to root_path
-      end
+      redirect_to root_path if current_user.nickname != @item.user.nickname
     else
       redirect_to user_session_path
     end
