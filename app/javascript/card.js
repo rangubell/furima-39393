@@ -14,11 +14,16 @@ const pay = () => {
     e.preventDefault();
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
-        console.log(response.error.message);
       } else {
         const token = response.id;
-        console.log(token);
+        const renderDom = document.getElementById("charge-form");
+        const tokenObj = `<input value=${token} name='token' type="hidden">`;
+        renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
+      numberElement.clear();
+      expiryElement.clear();
+      cvcElement.clear();
+      document.getElementById("charge-form").submit();
     });
   });
 };
