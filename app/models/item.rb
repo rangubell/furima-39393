@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  
   validates :item,                  presence: true
   validates :description,           presence: true
   validates :category_id,           presence: true, exclusion: { in: [1], message: 'must be selected' }
@@ -13,5 +14,6 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   belongs_to :user
+  has_one :purchase
   # has_one :purchase
 end
