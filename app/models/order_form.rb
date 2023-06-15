@@ -8,9 +8,11 @@ class OrderForm
     validates :municipality
     validates :address
     validates :phone_number, length: { minimum: 10 }, numericality: { only_integer: true }
+    validates :token
     validates :item_id
     validates :user_id
   end
+    
 
   def save
     purchase = Purchase.create(
