@@ -31,10 +31,10 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors[:postal_code]).to include('Enter it as follows (e.g. 123-4567)')
       end
 
-      it 'prefecture_idが空だと保存できないこと' do
-        @order_form.prefecture_id = nil
+      it 'prefecture_idが1の場合は登録できない' do
+        @order_form.prefecture_id = 1
         expect(@order_form).not_to be_valid
-        expect(@order_form.errors[:prefecture_id]).to include("can't be blank")
+        expect(@order_form.errors[:prefecture_id]).to include("must be selected")
       end
 
       it 'municipalityが空だと保存できないこと' do
@@ -69,6 +69,22 @@ RSpec.describe OrderForm, type: :model do
         @order_form.token = ''
         expect(@order_form).not_to be_valid
         expect(@order_form.errors.full_messages).to include("Token can't be blank")
+      end
+      it '電話番号に半角数字以外が含まれている場合は購入できない' do
+        @order_form.phone_number = '123-456-7890'
+        expect(@order_form).not_to be_valid
+        expect(@order_form.errors[:phone_number]).to include('is invalid')
+      end
+      it 'itemが紐づいていないと保存できない' do
+        @order_form.item_id = nil
+        expect(@order_form).not_to be_valid
+        expect(@order_form.errors[:item_id]).to include("can't be blank")
+      end
+
+      it 'userが紐づいていないと保存できない' do
+        @order_form.user_id = nil
+        expect(@order_form).not_to be_valid
+        expect(@order_form.errors[:user_id]).to include("can't be blank")
       end
     end
   end
