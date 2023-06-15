@@ -7,7 +7,7 @@ class OrderForm
     validates :prefecture_id
     validates :municipality
     validates :address
-    validates :phone_number, length: { minimum: 10 }, numericality: { only_integer: true }
+    validates :phone_number, length: { minimum: 10, maximum: 11 }, format: { with: /\A\d+\z/ }
     validates :token
     validates :item_id
     validates :user_id

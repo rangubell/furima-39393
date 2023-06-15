@@ -60,6 +60,11 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form).not_to be_valid
         expect(@order_form.errors[:phone_number]).to include("is too short (minimum is 10 characters)")
       end
+      it 'phone_numberが12桁以上だと保存できないこと' do
+        @order_form.phone_number = '123456789012'
+        expect(@order_form).not_to be_valid
+        expect(@order_form.errors[:phone_number]).to include("is too long (maximum is 11 characters)")
+      end      
       it "tokenが空では登録できないこと" do
         @order_form.token = ''
         expect(@order_form).not_to be_valid
