@@ -7,7 +7,6 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
   end
 
   def create
@@ -23,8 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return if current_user.id == @item.user.id
-
+    if current_user != @item.user || @item.purchase.present?
     redirect_to root_path
   end
 
@@ -37,7 +35,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @item.user.id
+    if current_user == @item.user && @item.purchase.blank?
       @item.destroy
       redirect_to root_path
     else
