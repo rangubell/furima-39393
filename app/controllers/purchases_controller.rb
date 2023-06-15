@@ -2,8 +2,18 @@ class PurchasesController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
-    @order_form = OrderForm.new
+    if user_signed_in?
+      if current_user == @item.user || @item.purchase.present?
+        redirect_to root_path
+      else
+        @order_form = OrderForm.new
+      end
+    else
+      redirect_to root_path
+    end
   end
+  
+  
 
   def new
     @order_form = OrderForm.new
