@@ -23,9 +23,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return if current_user.id == @item.user.id
-
-    redirect_to root_path
+    if current_user != @item.user || @item.purchase.present?
+      redirect_to root_path, alert: "アクセス権限がありません"
+    end
   end
 
   def update
@@ -37,11 +37,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @item.user.id
+    if current_user == @item.user && @item.purchase.blank?
       @item.destroy
       redirect_to root_path
     else
-      redirect_to root_path
+      redirect_to root_path, alert: "アクセス権限がありません"
     end
   end
 
