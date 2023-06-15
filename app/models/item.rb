@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-  
   validates :item,                  presence: true
   validates :description,           presence: true
   validates :category_id,           presence: true, exclusion: { in: [1], message: 'must be selected' }

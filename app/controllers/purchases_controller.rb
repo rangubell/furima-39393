@@ -12,8 +12,6 @@ class PurchasesController < ApplicationController
       redirect_to root_path
     end
   end
-  
-  
 
   def new
     @order_form = OrderForm.new
@@ -23,23 +21,23 @@ class PurchasesController < ApplicationController
     @order_form = OrderForm.new(order_params)
     @order_form.price = @item.price
     if @order_form.valid?
-       pay_item
-       @order_form.save
-       redirect_to root_path
+      pay_item
+      @order_form.save
+      redirect_to root_path
     else
-       render :index
+      render :index
     end
   end
 
   private
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @order_form.price,
-        card: order_params[:token],
-        currency: 'jpy'
-      )
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @order_form.price,
+      card: order_params[:token],
+      currency: 'jpy'
+    )
   end
 
   def set_item
@@ -47,6 +45,8 @@ class PurchasesController < ApplicationController
   end
 
   def order_params
-    params.require(:order_form).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :item_id, :user_id).merge(item_id: params[:item_id], user_id: current_user.id,token: params[:token],)
+    params.require(:order_form).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :item_id, :user_id).merge(
+      item_id: params[:item_id], user_id: current_user.id, token: params[:token]
+    )
   end
 end
