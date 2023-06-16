@@ -31,10 +31,10 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors[:postal_code]).to include('Enter it as follows (e.g. 123-4567)')
       end
 
-      it 'prefecture_idが1の場合は登録できない' do
-        @order_form.prefecture_id = 1
+      it 'prefectureが1の場合は登録できない' do
+        @order_form.prefecture = 1
         expect(@order_form).not_to be_valid
-        expect(@order_form.errors[:prefecture_id]).to include("must be selected")
+        expect(@order_form.errors[:prefecture]).to include("must be selected")
       end
 
       it 'municipalityが空だと保存できないこと' do
