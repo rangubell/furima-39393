@@ -13,10 +13,6 @@ class PurchasesController < ApplicationController
     end
   end
 
-  def new
-    @order_form = OrderForm.new
-  end
-
   def create
     @order_form = OrderForm.new(order_params)
     @order_form.price = @item.price
@@ -32,7 +28,7 @@ class PurchasesController < ApplicationController
   private
 
   def pay_item
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: @order_form.price,
       card: order_params[:token],
@@ -45,7 +41,7 @@ class PurchasesController < ApplicationController
   end
 
   def order_params
-    params.require(:order_form).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :item_id, :user_id).merge(
+    params.require(:order_form).permit(:postal_code, :shipping_origin_id, :municipality, :address, :building_name, :phone_number, :item_id, :user_id).merge(
       item_id: params[:item_id], user_id: current_user.id, token: params[:token]
     )
   end
