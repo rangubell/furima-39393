@@ -21,7 +21,7 @@ class OrderForm
     )
     shipping_address = ShippingAddress.create(
       postal_code: postal_code,
-      prefecture: prefecture,
+      prefecture_id: prefecture,
       municipality: municipality,
       address: address,
       building_name: building_name,
