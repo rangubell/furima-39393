@@ -18,10 +18,6 @@ ja:
         shipping_duration_id: 発送までの日数
         price: 価格
         image: 商品画像
-        
-      tweet:
-        text: テキスト
-        image: 画像
   activemodel:
     attributes:
       order_form:
