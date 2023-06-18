@@ -28,13 +28,13 @@ RSpec.describe OrderForm, type: :model do
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @order_form.postal_code = '1234567'
         expect(@order_form).not_to be_valid
-        expect(@order_form.errors[:postal_code]).to include('Enter it as follows (e.g. 123-4567)')
+        expect(@order_form.errors[:postal_code]).to include('は以下の形式で入力してください（例: 123-4567）')
       end
 
       it 'prefecture_idが1の場合は登録できない' do
         @order_form.prefecture_id = 1
         expect(@order_form).not_to be_valid
-        expect(@order_form.errors[:prefecture_id]).to include("must be selected")
+        expect(@order_form.errors[:prefecture_id]).to include("を選んでください")
       end
 
       it 'municipalityが空だと保存できないこと' do
